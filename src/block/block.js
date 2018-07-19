@@ -1,5 +1,5 @@
 /**
- * BLOCK: Kona: Instagram for Gutenberg
+ * BLOCK: tumbili: mailchimp for Gutenberg
  */
 
 //  Import CSS.
@@ -21,12 +21,12 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'cgb/kona-instagram-for-gutenberg', {
+registerBlockType( 'cgb/tumbili-mailchimp-for-gutenberg', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'Kona: Instagram for Gutenberg' ), // Block title.
-	icon: 'camera', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
+	title: __( 'Tumbili: Mailchimp for Gutenberg' ), // Block title.
+	icon: 'email-alt', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
-	keywords: [ __( 'kona' ), __( 'instagram' ) ],
+	keywords: [ __( 'tumbili' ), __( 'mailchimp' ) ],
 	attributes,
 
 	/**
@@ -37,6 +37,7 @@ registerBlockType( 'cgb/kona-instagram-for-gutenberg', {
 	/**
 	 * Save
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+	 * @return {null} null
 	 */
 	save( { attributes, className } ) {
 		//gutenberg will save attributes we can use in server-side callback

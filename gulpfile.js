@@ -6,6 +6,6 @@ gulp.task( 'release', () =>
 		.src( [ 'dist/*', 'src/*.php', '*.jpg', 'readme.txt', '*.php' ], {
 			base: './',
 		} )
-		.pipe( zip( 'kona-instagram-for-gutenberg.zip' ) )
+		.pipe( zip( 'tumbili-mailchimp-for-gutenberg.zip' ) )
 		.pipe( gulp.dest( './' ) )
 );

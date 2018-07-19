@@ -4,42 +4,16 @@
  * CSS for both Frontend+Backend.
  */
 
-.wp-block-cgb-kona-instagram-for-gutenberg {
+.wp-block-cgb-tumbili-mailchimp-for-gutenberg {
 	margin: 0 auto;
-	@media all and (max-width: $sm) {
-		.kona-grid {
-			grid-template-columns: repeat(2, 1fr) !important;
-		}
-	}
-	@media all and (min-width: $sm) and (max-width: $lg) {
-		.kona-grid {
-			grid-template-columns: repeat(4, 1fr) !important;
-		}
-	}
+	max-width: 740px;
 }
 
-.display-grid {
-	display: grid;
+.display-flex {
+	display: flex;
+	flex-wrap: wrap;
 }
 
-/* flexbox fallback if the browser does not support display:grid */
-@supports not (display: grid) {
-	.display-grid {
-		display: flex;
-		flex-wrap: row wrap;
-		> * {
-			flex: 0 1 1;
-		}
-	}
-}
-
-/**
-Image Styling
-**/
-.kona-image {
-	opacity: 1;
-	transition: opacity 0.5s ease-in-out;
-	&:hover {
-		opacity: 0.8;
-	}
+.flex-grow {
+	flex-grow: 1;
 }

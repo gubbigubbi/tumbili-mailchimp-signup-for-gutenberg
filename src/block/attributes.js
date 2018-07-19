@@ -1,22 +1,14 @@
 export const attributes = {
-	token: {
+	formAction: {
 		type: 'string',
 		default: '',
 	},
-	numberCols: {
-		type: 'number',
-		default: 4,
+	showFirstName: {
+		type: 'boolean',
+		default: false,
 	},
-	numberImages: {
-		type: 'number',
-		default: 4,
-	},
-	thumbs: {
-		type: 'array',
-		default: [],
-	},
-	gridGap: {
-		type: 'number',
-		default: 0,
+	showLastName: {
+		type: 'boolean',
+		default: false,
 	},
 };

@@ -1,8 +1,8 @@
-# Kona: Instagram for Gutenberg 📷
+# Tumbili: mailchimp for Gutenberg 📷
 
-Brings Instagram to your editor live, so fresh so clean.
+Add a mailchimp signup form to your editor. Tweak it and test it before publishing #ganggang
 
-![alt text](https://github.com/gubbigubbi/kona-instagram/blob/master/screenshot-3.jpg 'Kona in action baby!')
+![alt text](https://github.com/gubbigubbi/tumbili-mailchimp/blob/master/screenshot-3.jpg 'tumbili in action baby!')
 
 ## 👉 `npm start`
 

@@ -2,111 +2,55 @@
 const { Component } = wp.element;
 
 const { InspectorControls } = wp.editor;
-const { PanelBody, RangeControl, TextControl } = wp.components;
+const { PanelBody, TextControl, ToggleControl } = wp.components;
 
 const { __ } = wp.i18n;
 
-export default class InstagramEdit extends Component {
+export default class mailchimpEdit extends Component {
 	constructor() {
 		super( ...arguments );
-		this.onChangeImages = this.onChangeImages.bind( this );
-		this.onChangeToken = this.onChangeToken.bind( this );
 
-		this.state = {
-			hasToken: false,
-		};
-	}
-
-	componentDidMount() {
-		this.fetchPhotos();
-	}
-
-	fetchPhotos( count, token ) {
-		const _COUNT = count ? count : this.props.attributes.numberImages;
-		const _TOKEN = token ? token : this.props.attributes.token;
-
-		if ( ! _TOKEN ) {
-			return false;
-		}
-
-		return fetch(
-			`https://api.instagram.com/v1/users/self/media/recent/?access_token=${ _TOKEN }&count=${ _COUNT }`
-		)
-			.then( res => res.json() )
-			.then( json => {
-				this.props.setAttributes( {
-					thumbs: json.data,
-				} );
-			} );
-	}
-
-	onChangeToken( token ) {
-		this.props.setAttributes( {
-			token,
-		} );
-		this.fetchPhotos( this.props.attributes.numberImages, token );
-	}
-
-	onChangeImages( numberImages ) {
-		this.props.setAttributes( {
-			numberImages,
-		} );
-		this.fetchPhotos( numberImages );
+		this.state = {};
 	}
 
 	render() {
 		const {
-			attributes: { token, numberCols, numberImages, thumbs, gridGap },
+			attributes: { formAction, showFirstName, showLastName },
 			className,
 			setAttributes,
 		} = this.props;
 
+		let firstNameInput;
+
+		if ( showFirstName ) {
+			firstNameInput = (
+				<input className="flex-grow" name="firstName" type="text" />
+			);
+		}
+
+		let lastNameInput;
+
+		if ( showLastName ) {
+			lastNameInput = (
+				<input className="flex-grow" name="lastName" type="text" />
+			);
+		}
+
 		let container;
 
-		if ( token ) {
+		if ( formAction ) {
 			container = (
-				<div
-					className="display-grid kona-grid"
-					style={ {
-						gridTemplateColumns: `repeat(${ numberCols }, 1fr)`,
-						marginLeft: `-${ gridGap }px`,
-						marginRight: `-${ gridGap }px`,
-					} }
-				>
-					{ thumbs.map( photo => {
-						return (
-							<a
-								href={ photo.link }
-								key={ photo.id }
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<img
-									className="kona-image"
-									src={ photo.images.standard_resolution.url }
-									alt={ photo.caption.text }
-									style={ {
-										padding: `${ gridGap }px`,
-									} }
-								/>
-							</a>
-						);
-					} ) }
-				</div>
+				<form className="display-flex tumbili-container" action={ formAction }>
+					<input className="flex-grow" name="email" type="email" />
+					{ firstNameInput }
+					{ lastNameInput }
+					<input className="flex-grow" type="submit" value="Submit" />
+				</form>
 			);
 		} else {
 			container = (
 				<div className={ className }>
-					To get started please add an Instagram Access Token.{ ' ' }
-					<a
-						target="_blank"
-						rel="noopener noreferrer"
-						href="http://instagram.pixelunion.net/"
-					>
-						To do this login to instagram and click here.
-					</a>
-					Once you have a token, please paste it into the 'Instagram Access
-					Token' setting.
+					To get started please add an Action URL.
 				</div>
 			);
 		}
@@ -114,40 +58,21 @@ export default class InstagramEdit extends Component {
 		return (
 			<div className={ className }>
 				<InspectorControls>
-					<PanelBody title={ __( 'Step 1: Access Tokens' ) }>
+					<PanelBody title={ __( 'Form Options' ) }>
 						<TextControl
-							label={ __( 'Instagram Access Token' ) }
-							value={ token }
-							onChange={ this.onChangeToken }
+							label={ __( 'Mailchimp Form URL' ) }
+							value={ formAction }
+							onChange={ formAction => setAttributes( { formAction } ) }
 						/>
-					</PanelBody>
-					<PanelBody title={ __( 'Step 2: Layout Options' ) }>
-						<RangeControl
-							value={ numberCols }
-							onChange={ numberCols => setAttributes( { numberCols } ) }
-							min={ 1 }
-							max={ 6 }
-							step={ 1 }
-							label={ __( 'Columns' ) }
+						<ToggleControl
+							label={ __( 'Show First Name?' ) }
+							checked={ showFirstName }
+							onChange={ showFirstName => setAttributes( { showFirstName } ) }
 						/>
-
-						<RangeControl
-							value={ numberImages }
-							onChange={ this.onChangeImages }
-							min={ 1 }
-							max={ 20 }
-							step={ 1 }
-							allowReset="true"
-							label={ __( 'Images' ) }
-						/>
-
-						<RangeControl
-							value={ gridGap }
-							onChange={ gridGap => setAttributes( { gridGap } ) }
-							min={ 0 }
-							max={ 20 }
-							step={ 1 }
-							label={ __( 'Image spacing (px)' ) }
+						<ToggleControl
+							label={ __( 'Show Last Name?' ) }
+							checked={ showLastName }
+							onChange={ showLastName => setAttributes( { showLastName } ) }
 						/>
 					</PanelBody>
 				</InspectorControls>
