@@ -1,5 +1,5 @@
 //import Inspector from './inspector';
-const { Component } = wp.element;
+const { Component, Fragment } = wp.element;
 
 const { InspectorControls } = wp.editor;
 const { PanelBody, TextControl, ToggleControl } = wp.components;
@@ -15,7 +15,7 @@ export default class mailchimpEdit extends Component {
 
 	render() {
 		const {
-			attributes: { formAction, showFirstName, showLastName },
+			attributes: { formAction, showFirstName, showLastName, apiKey, listID },
 			className,
 			setAttributes,
 		} = this.props;
@@ -24,7 +24,12 @@ export default class mailchimpEdit extends Component {
 
 		if ( showFirstName ) {
 			firstNameInput = (
-				<input className="flex-grow" name="firstName" type="text" />
+				<div className="tumbili-form-control flex-grow">
+					<label htmlFor="firstName">
+						First Name
+						<input name="firstName" type="text" />
+					</label>
+				</div>
 			);
 		}
 
@@ -32,7 +37,12 @@ export default class mailchimpEdit extends Component {
 
 		if ( showLastName ) {
 			lastNameInput = (
-				<input className="flex-grow" name="lastName" type="text" />
+				<div className="tumbili-form-control flex-grow">
+					<label htmlFor="lasttName">
+						Last Name
+						<input name="lastName" type="text" />
+					</label>
+				</div>
 			);
 		}
 
@@ -41,10 +51,17 @@ export default class mailchimpEdit extends Component {
 		if ( formAction ) {
 			container = (
 				<form className="display-flex tumbili-container" action={ formAction }>
-					<input className="flex-grow" name="email" type="email" />
 					{ firstNameInput }
 					{ lastNameInput }
-					<input className="flex-grow" type="submit" value="Submit" />
+					<div className="tumbili-form-control flex-grow">
+						<label htmlFor="email">
+							Email
+							<input name="email" type="email" />
+						</label>
+					</div>
+					<div className="flex-grow">
+						<input className="tumbili-submit" type="submit" value="Submit" />
+					</div>
 				</form>
 			);
 		} else {
@@ -63,6 +80,16 @@ export default class mailchimpEdit extends Component {
 							label={ __( 'Mailchimp Form URL' ) }
 							value={ formAction }
 							onChange={ formAction => setAttributes( { formAction } ) }
+						/>
+						<TextControl
+							label={ __( 'Mailchimp API Key' ) }
+							value={ apiKey }
+							onChange={ apiKey => setAttributes( { apiKey } ) }
+						/>
+						<TextControl
+							label={ __( 'Mailchimp List ID' ) }
+							value={ listID }
+							onChange={ listID => setAttributes( { listID } ) }
 						/>
 						<ToggleControl
 							label={ __( 'Show First Name?' ) }

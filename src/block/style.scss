@@ -6,14 +6,48 @@
 
 .wp-block-cgb-tumbili-mailchimp-for-gutenberg {
 	margin: 0 auto;
-	max-width: 740px;
 }
 
 .display-flex {
 	display: flex;
 	flex-wrap: wrap;
+	> * {
+		padding-left: $gutter;
+		padding-right: $gutter;
+	}
 }
 
 .flex-grow {
 	flex-grow: 1;
+}
+
+/**
+Labels
+**/
+.tumbili-form-control {
+	input,
+	label {
+		display: block;
+	}
+	input {
+		width: 100%;
+	}
+}
+
+/**
+Submit
+**/
+.tumbili-submit {
+	width: 100%;
+	height: 100%;
+}
+
+/**
+Interactivity
+**/
+.tumbili-container {
+	transition: all 0.3s ease;
+}
+.isSubmitting {
+	filter: blur(1px);
 }

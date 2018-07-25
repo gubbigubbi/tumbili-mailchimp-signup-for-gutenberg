@@ -3,6 +3,14 @@ export const attributes = {
 		type: 'string',
 		default: '',
 	},
+	apiKey: {
+		type: 'string',
+		default: '',
+	},
+	listID: {
+		type: 'string',
+		default: '',
+	},
 	showFirstName: {
 		type: 'boolean',
 		default: false,

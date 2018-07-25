@@ -7,3 +7,13 @@
 
 .wp-block-cgb-block-gutengram {
 }
+
+.tumbili-submit {
+	border: none;
+	background-color: $blue;
+	transition: all 0.5s ease;
+	&:hover,
+	&:active {
+		background-color: darken($blue, 5%);
+	}
+}
