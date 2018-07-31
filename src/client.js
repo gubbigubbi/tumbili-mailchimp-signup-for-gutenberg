@@ -1,7 +1,5 @@
 function tumbiliSubmitForm() {
 	const form = document.getElementById( 'tumbili-form' );
-	form.classList.toggle( 'isSubmitting' );
-
 	const data = {};
 
 	data.fname = document.getElementById( 'FNAME' ) ?
@@ -18,10 +16,10 @@ function tumbiliSubmitForm() {
 	data.listID = form.dataset.listid;
 	data.dc = form.dataset.apikey.split( '-' )[ 1 ];
 
-	sendRequestViaAJAX( data );
+	sendRequestViaAJAX( data, form );
 }
 
-function sendRequestViaAJAX( formData ) {
+function sendRequestViaAJAX( formData, form ) {
 	jQuery.ajax( {
 		url: tumbili.ajax_url,
 		type: 'post',
@@ -29,10 +27,30 @@ function sendRequestViaAJAX( formData ) {
 			action: 'tumbili_mailchimp_add_subscriber',
 			formData,
 		},
-		success: function( response ) {
-			alert( response );
+		dataType: 'json',
+		beforeSend: () => {
+			form.classList.toggle( 'isSubmitting' );
+		},
+		success: response => {
+			showApiResult( response );
+		},
+		complete: () => {
+			form.classList.toggle( 'isSubmitting' );
 		},
 	} );
+}
+
+function showApiResult( response ) {
+	console.log( response );
+	console.log( typeof response );
+
+	const formContainer = document.querySelector( '.tumbili-container' );
+	formContainer.classList.add( 'is-hiding' );
+
+	formContainer.insertAdjacentHTML(
+		'afterend',
+		`<div class="tumbili-response is-shown">${ response.title }</div>`
+	);
 }
 
 // function sendRequest( formData ) {

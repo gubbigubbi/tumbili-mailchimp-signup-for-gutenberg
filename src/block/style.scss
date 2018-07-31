@@ -43,6 +43,13 @@ Submit
 }
 
 /**
+Response
+**/
+.tumbili-response {
+	text-align: center;
+}
+
+/**
 Interactivity
 **/
 .tumbili-container {
@@ -50,4 +57,13 @@ Interactivity
 }
 .isSubmitting {
 	filter: blur(1px);
+}
+
+.is-shown {
+	transition: all 400ms;
+	transform: scaleY(1);
+}
+.is-hiding {
+	opacity: 0;
+	transform: scaleY(0);
 }

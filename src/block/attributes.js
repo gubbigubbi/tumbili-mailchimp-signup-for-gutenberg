@@ -1,8 +1,4 @@
 export const attributes = {
-	formAction: {
-		type: 'string',
-		default: '',
-	},
 	apiKey: {
 		type: 'string',
 		default: '',

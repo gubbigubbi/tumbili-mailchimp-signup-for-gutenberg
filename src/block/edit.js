@@ -48,9 +48,9 @@ export default class mailchimpEdit extends Component {
 
 		let container;
 
-		if ( formAction ) {
+		if ( apiKey && listID ) {
 			container = (
-				<form className="display-flex tumbili-container" action={ formAction }>
+				<div className="display-flex tumbili-container">
 					{ firstNameInput }
 					{ lastNameInput }
 					<div className="tumbili-form-control flex-grow">
@@ -62,12 +62,12 @@ export default class mailchimpEdit extends Component {
 					<div className="flex-grow">
 						<input className="tumbili-submit" type="submit" value="Submit" />
 					</div>
-				</form>
+				</div>
 			);
 		} else {
 			container = (
 				<div className={ className }>
-					To get started please add an Action URL.
+					To get started please add an API Key & List ID.
 				</div>
 			);
 		}
@@ -76,11 +76,6 @@ export default class mailchimpEdit extends Component {
 			<div className={ className }>
 				<InspectorControls>
 					<PanelBody title={ __( 'Form Options' ) }>
-						<TextControl
-							label={ __( 'Mailchimp Form URL' ) }
-							value={ formAction }
-							onChange={ formAction => setAttributes( { formAction } ) }
-						/>
 						<TextControl
 							label={ __( 'Mailchimp API Key' ) }
 							value={ apiKey }

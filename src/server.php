@@ -52,6 +52,8 @@ function tumbili_mailchimp_add_subscriber( ) {
 	$url = 'http://'.$datacenter.'.api.mailchimp.com/3.0/lists/'.$list_id.'/members/';
 	$auth = base64_encode( 'user:'.$api_key );
 
+	$response = [];
+
 	$data = array(
 			'email_address' => $email,
 			'status'        => $status,
@@ -61,26 +63,32 @@ function tumbili_mailchimp_add_subscriber( ) {
 			)
 	);
 
+	$response = json_encode(tumbili_fetchData($url, $data, $auth));
+	echo $response;
+	wp_die();
+}
+
+function tumbili_fetchData($url, $data, $auth) {
+
 	$data_string = json_encode($data);
 
-	$ch = curl_init();
-	curl_setopt( $ch, CURLOPT_URL, $url );
-	curl_setopt( $ch, CURLOPT_POST, 1 );
-	curl_setopt( $ch, CURLOPT_POSTFIELDS, $data_string );
-	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-	curl_setopt( $ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
-	curl_setopt( $ch, CURLOPT_HTTPHEADER, array(
-			'Content-Type: application/json',
-			'Content-Length: '.strlen($data_string),
-			'Authorization: Basic '.$auth
-	) );
-	$result = curl_exec($ch);
-	if ( !curl_exec($ch) ) {
-			echo 'Error: '.curl_error($ch);
+	$args = array(
+		'method'	=> 'POST',
+		'headers' => array(
+			'Content-Type' 		=> 'application/json',
+			'Content-Length'  => strlen($data_string),
+			'Authorization' 	=> 'Basic '.$auth
+		),
+		'body'    => json_encode($data),
+	); 
+
+	$request = wp_remote_post( $url, $args);
+
+	if(is_wp_error( $request )) { 
+		return false;
 	}
-	curl_close($ch);
-	echo $result;
-	die();
+
+	return json_decode( $request['body'] );
 }
 
 
@@ -113,7 +121,7 @@ function tumbili_render_callback( array $attributes ){
 	}
 
 	$markup = '<form id="tumbili-form" data-apikey="'.$apiKey.'" data-listid="'.$listID.'" action="'.$formAction.'" method="post" class="wp-block-cgb-tumbili-mailchimp-for-gutenberg">
-	<div class="display-flex tumbili-container">';
+	<div class="display-flex tumbili-container is-shown">';
 
 		$markup .= $firstName;
 		$markup .= $lastName;

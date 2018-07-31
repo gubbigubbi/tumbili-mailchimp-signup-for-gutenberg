@@ -32,7 +32,7 @@ function tumbili_block_assets() {
 		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: filemtime — Gets file modification time.
 	);
 
-	wp_enqueue_script( 'tumbili-js', plugins_url( 'src/server.js', dirname( __FILE__ ) ), null, true );
+	wp_enqueue_script( 'tumbili-js', plugins_url( 'src/client.js', dirname( __FILE__ ) ), null, true );
 
 	wp_localize_script( 'tumbili-js', 'tumbili', array(
 		'ajax_url' => admin_url( 'admin-ajax.php' )
