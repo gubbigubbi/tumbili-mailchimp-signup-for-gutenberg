@@ -6,6 +6,7 @@
 
 .wp-block-cgb-tumbili-mailchimp-for-gutenberg {
 	margin: 0 auto;
+	position: relative;
 }
 
 .display-flex {
@@ -47,6 +48,26 @@ Response
 **/
 .tumbili-response {
 	text-align: center;
+	position: absolute;
+	width: 100%;
+	max-width: 440px;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	padding: 0.5rem;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+	border-radius: 0.25rem;
+
+	&:after {
+		content: '';
+		background-image: url('../assets/reload.svg');
+		background-size: 24px 24px;
+		height: 24px;
+		width: 24px;
+		margin-left: 0.5rem;
+		display: inline-block;
+		vertical-align: middle;
+	}
 }
 
 /**
@@ -59,11 +80,13 @@ Interactivity
 	filter: blur(1px);
 }
 
-.is-shown {
+.will-animate {
 	transition: all 400ms;
-	transform: scaleY(1);
+}
+.is-showing {
+	opacity: 1;
 }
 .is-hiding {
 	opacity: 0;
-	transform: scaleY(0);
+	visibility: hidden;
 }

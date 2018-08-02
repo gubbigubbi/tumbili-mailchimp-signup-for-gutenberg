@@ -49,7 +49,8 @@ function tumbili_mailchimp_add_subscriber( ) {
 	// if ( !empty($_POST['status']) ) {
 	// 		$status = $_POST['status'];
 	// }
-	$url = 'http://'.$datacenter.'.api.mailchimp.com/3.0/lists/'.$list_id.'/members/';
+	$url = "https://{$datacenter}.api.mailchimp.com/3.0/lists/{$list_id}/members/";
+
 	$auth = base64_encode( 'user:'.$api_key );
 
 	$response = [];
@@ -120,8 +121,10 @@ function tumbili_render_callback( array $attributes ){
 		</div>';
 	}
 
-	$markup = '<form id="tumbili-form" data-apikey="'.$apiKey.'" data-listid="'.$listID.'" action="'.$formAction.'" method="post" class="wp-block-cgb-tumbili-mailchimp-for-gutenberg">
-	<div class="display-flex tumbili-container is-shown">';
+	$markup = '<form id="tumbili-form" data-apikey="'.$apiKey.'" data-listid="'.$listID.'" action="'.$formAction.'" method="post" class="wp-block-cgb-tumbili-mailchimp-for-gutenberg">';
+	
+		$markup .= '<a class="tumbili-response will-animate is-hiding"></a>';
+		$markup .= '<div class="display-flex tumbili-container will-animate">';
 
 		$markup .= $firstName;
 		$markup .= $lastName;

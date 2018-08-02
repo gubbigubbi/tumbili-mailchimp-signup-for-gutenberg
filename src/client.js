@@ -42,48 +42,32 @@ function sendRequestViaAJAX( formData, form ) {
 
 function showApiResult( response ) {
 	console.log( response );
-	console.log( typeof response );
+	let title;
 
-	const formContainer = document.querySelector( '.tumbili-container' );
-	formContainer.classList.add( 'is-hiding' );
+	if ( response.status !== 200 ) {
+		title = `Oops something wen't wrong: ${ response.title }`;
+	} else {
+		title = `${ response.title }`;
+	}
 
-	formContainer.insertAdjacentHTML(
-		'afterend',
-		`<div class="tumbili-response is-shown">${ response.title }</div>`
-	);
+	toggleForm( title );
 }
 
-// function sendRequest( formData ) {
-// 	const request = new XMLHttpRequest();
-
-// 	const data = {
-// 		email_address: formData.email,
-// 		status: 'pending',
-// 	};
-
-// 	// data center
-// 	const dataCenter = formData.apikey.split( '-' )[ 1 ];
-
-// 	request.open(
-// 		'POST',
-// 		`https://${ dataCenter }.api.mailchimp.com/3.0/lists/${
-// 			formData.listID
-// 		}/members/`,
-// 		true
-// 	);
-// 	request.setRequestHeader( 'Content-Type', 'application/json; charset=UTF-' );
-// 	request.setRequestHeader(
-// 		'Authorization',
-// 		'Basic ' + btoa( 'user:' + formData.apikey )
-// 	);
-// 	request.send( data );
-// }
+function toggleForm( title = '' ) {
+	const formContainer = document.querySelector( '.tumbili-container' );
+	const responseContainer = document.querySelector( '.tumbili-response' );
+	formContainer.classList.toggle( 'is-hiding' );
+	responseContainer.classList.toggle( 'is-hiding' );
+	responseContainer.innerHTML = title;
+}
 
 window.onload = function() {
-	document
-		.getElementById( 'tumbili-form' )
-		.addEventListener( 'submit', function( evt ) {
-			evt.preventDefault();
-			tumbiliSubmitForm();
-		} );
+	document.getElementById( 'tumbili-form' ).addEventListener( 'submit', evt => {
+		evt.preventDefault();
+		tumbiliSubmitForm();
+	} );
+
+	document.querySelector( '.tumbili-response' ).addEventListener( 'click', () => {
+		toggleForm();
+	} );
 };
