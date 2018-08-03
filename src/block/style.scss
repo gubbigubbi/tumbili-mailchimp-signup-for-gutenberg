@@ -22,10 +22,15 @@
 	flex-grow: 1;
 }
 
+.flex-is-at-bottom {
+	display: flex;
+	align-items: end;
+}
 /**
 Labels
 **/
 .tumbili-form-control {
+	margin-bottom: 1rem;
 	input,
 	label {
 		display: block;
@@ -40,7 +45,16 @@ Submit
 **/
 .tumbili-submit {
 	width: 100%;
-	height: 100%;
+	//height: 100%;
+	.tumbili-loader {
+		display: inline-block;
+		margin-right: 0.5rem;
+	}
+	.tumbili-loader.is-hiding {
+		width: 0;
+		margin-right: 0;
+		display: none;
+	}
 }
 
 /**
@@ -75,9 +89,12 @@ Interactivity
 **/
 .tumbili-container {
 	transition: all 0.3s ease;
+	margin-bottom: -1rem;
 }
 .isSubmitting {
-	filter: blur(1px);
+	input {
+		filter: blur(1px);
+	}
 }
 
 .will-animate {
@@ -90,3 +107,5 @@ Interactivity
 	opacity: 0;
 	visibility: hidden;
 }
+
+@import 'loaders/loaders';

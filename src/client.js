@@ -1,5 +1,6 @@
 function tumbiliSubmitForm() {
 	const form = document.getElementById( 'tumbili-form' );
+	const loader = document.querySelector( '.tumbili-loader' );
 	const data = {};
 
 	data.fname = document.getElementById( 'FNAME' ) ?
@@ -16,10 +17,10 @@ function tumbiliSubmitForm() {
 	data.listID = form.dataset.listid;
 	data.dc = form.dataset.apikey.split( '-' )[ 1 ];
 
-	sendRequestViaAJAX( data, form );
+	sendRequestViaAJAX( data, form, loader );
 }
 
-function sendRequestViaAJAX( formData, form ) {
+function sendRequestViaAJAX( formData, form, loader ) {
 	jQuery.ajax( {
 		url: tumbili.ajax_url,
 		type: 'post',
@@ -30,12 +31,14 @@ function sendRequestViaAJAX( formData, form ) {
 		dataType: 'json',
 		beforeSend: () => {
 			form.classList.toggle( 'isSubmitting' );
+			loader.classList.toggle( 'is-hiding' );
 		},
 		success: response => {
 			showApiResult( response );
 		},
 		complete: () => {
 			form.classList.toggle( 'isSubmitting' );
+			loader.classList.toggle( 'is-hiding' );
 		},
 	} );
 }
@@ -44,10 +47,20 @@ function showApiResult( response ) {
 	console.log( response );
 	let title;
 
-	if ( response.status !== 200 ) {
-		title = `Oops something wen't wrong: ${ response.title }`;
+	if ( response.status === 400 ) {
+		switch ( response.title ) {
+			case 'Forgotten Email Not Subscribed':
+				title =
+					'Looks like you unsubscribed from this list previously, please contact us to resubscribe';
+				break;
+			case 'Member Exists':
+				title = '😄 Looks you are already subscribed';
+				break;
+			default:
+				title = `Oops something wen't wrong: ${ response.title }`;
+		}
 	} else {
-		title = `${ response.title }`;
+		title = '🎉 You have subscribed. Please check your inbox for confirmation.';
 	}
 
 	toggleForm( title );

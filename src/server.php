@@ -133,7 +133,20 @@ function tumbili_render_callback( array $attributes ){
 		<div class="tumbili-form-control flex-grow">
 			<label for="email">Email<input id="tumbiliEmail" name="email" type="email"></label>
 		</div>
-		<div class="flex-grow"><input class="tumbili-submit" value="Submit" type="submit"></div>
+		<div class="flex-grow flex-is-at-bottom tumbili-form-control">
+			<button class="tumbili-submit" value="Submit" type="submit">
+				<div class="tumbili-loader will-animate is-hiding">
+				<div class="loader-inner ball-pulse-sync">
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+				</div>
+				Submit
+			</button>
+		</div>
+
+
 		';
 	
 
