@@ -46,6 +46,8 @@ Submit
 .tumbili-submit {
 	width: 100%;
 	//height: 100%;
+	background-color: $blue;
+	border-color: $blue; // some themes might add a default border
 	.tumbili-loader {
 		display: inline-block;
 		margin-right: 0.5rem;

@@ -5,7 +5,7 @@
  * Description: Easily add a mailchimp signup form to your editor.
  * Author: gubbigubbi
  * Author URI: https://github.com/gubbigubbi/
- * Version: 0.0.1
+ * Version: 0.1
  * License: GPL2+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  *

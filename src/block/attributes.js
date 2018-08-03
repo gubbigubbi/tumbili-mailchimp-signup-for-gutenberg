@@ -15,4 +15,12 @@ export const attributes = {
 		type: 'boolean',
 		default: false,
 	},
+	buttonBackground: {
+		type: 'string',
+		default: '',
+	},
+	buttonColor: {
+		type: 'string',
+		default: '',
+	},
 };

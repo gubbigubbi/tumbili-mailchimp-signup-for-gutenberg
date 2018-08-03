@@ -22,6 +22,14 @@ register_block_type('cgb/tumbili-mailchimp-for-gutenberg', array(
 				'type' 		=> 'boolean',
 				'default' => false,
 			),
+			'buttonColor' => array(
+				'type' 		=> 'string',
+				'default' => '',
+			),
+			'buttonBackground' => array(
+				'type' 		=> 'string',
+				'default' => '',
+			),
 		)
 	)
 );
@@ -103,6 +111,8 @@ function tumbili_render_callback( array $attributes ){
 	$listID					= $attributes[ 'listID' ]		;
 	$showFirstName	= $attributes[ 'showFirstName' ];
 	$showLastName 	= $attributes[ 'showLastName' ];
+	$buttonBackground 	= $attributes[ 'buttonBackground' ];
+	$buttonColor 	= $attributes[ 'buttonColor' ];
 
 	$firstName = '';
 	$lastName = '';
@@ -134,7 +144,7 @@ function tumbili_render_callback( array $attributes ){
 			<label for="email">Email<input id="tumbiliEmail" name="email" type="email"></label>
 		</div>
 		<div class="flex-grow flex-is-at-bottom tumbili-form-control">
-			<button class="tumbili-submit" value="Submit" type="submit">
+			<button style="background-color: '.$buttonBackground.'; color: '.$buttonColor.'; border-color: '.$buttonBackground.'" class="tumbili-submit" value="Submit" type="submit">
 				<div class="tumbili-loader will-animate is-hiding">
 				<div class="loader-inner ball-pulse-sync">
 					<div></div>
