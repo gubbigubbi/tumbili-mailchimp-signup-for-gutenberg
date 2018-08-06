@@ -13,6 +13,7 @@
 	padding: 6px 9px;
 	font-size: 13px;
 	transition: all 0.5s ease;
+	border-width: 0px;
 	&:hover,
 	&:active {
 		background-color: darken($blue, 5%);
