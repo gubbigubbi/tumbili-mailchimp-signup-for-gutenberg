@@ -31,17 +31,24 @@ function tumbili_block_assets() {
 		array( 'wp-blocks' ) // Dependency to include the CSS after it.
 		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: filemtime — Gets file modification time.
 	);
-
-	wp_enqueue_script( 'tumbili-js', plugins_url( 'src/client.js', dirname( __FILE__ ) ), null, true );
-
-	wp_localize_script( 'tumbili-js', 'tumbili', array(
-		'ajax_url' => admin_url( 'admin-ajax.php' )
-	));
-
 } // End function tumbili_block_assets().
 
 // Hook: Frontend assets.
 add_action( 'enqueue_block_assets', 'tumbili_block_assets' );
+
+/**
+ * Enqueue assets for the frontend only
+ */
+
+ function tumbili_client_assets() {
+	wp_enqueue_script( 'tumbili-js', plugins_url( 'src/client.js', dirname( __FILE__ ) ), array('jquery'), true );
+
+	wp_localize_script( 'tumbili-js', 'tumbili', array(
+		'ajax_url' => admin_url( 'admin-ajax.php' )
+	));
+}
+
+add_action( 'wp_enqueue_scripts', 'tumbili_client_assets' );
 
 /**
  * Enqueue Gutenberg block assets for backend editor.

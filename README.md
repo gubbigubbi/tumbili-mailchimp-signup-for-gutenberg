@@ -1,8 +1,8 @@
-# Tumbili: mailchimp for Gutenberg 📷
+# Tumbili: Mailchimp Signup for Gutenberg 📷
 
 Add a mailchimp signup form to your editor. Tweak it and test it before publishing #ganggang
 
-![alt text](https://github.com/gubbigubbi/tumbili-mailchimp/blob/master/screenshot-3.jpg 'tumbili in action baby!')
+![alt text](https://github.com/gubbigubbi/tumbili-mailchimp/blob/master/screenshot-1.jpg 'tumbili in action baby!')
 
 ## 👉 `npm start`
 

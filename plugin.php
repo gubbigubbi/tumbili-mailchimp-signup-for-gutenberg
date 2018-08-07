@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: Tumbili: Mailchimp Feed for Gutenberg
+ * Plugin Name: Tumbili: Mailchimp Signup for Gutenberg
  * Plugin URI: https://github.com/gubbigubbi/tumbili-mailchimp
  * Description: Easily add a mailchimp signup form to your editor.
  * Author: gubbigubbi
  * Author URI: https://github.com/gubbigubbi/
- * Version: 0.1
+ * Version: 0.2
  * License: GPL2+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  *

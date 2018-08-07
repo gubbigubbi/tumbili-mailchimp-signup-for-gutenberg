@@ -37,42 +37,42 @@ register_block_type('cgb/tumbili-mailchimp-for-gutenberg', array(
 /**
  * Post to Mailchimp
  */
-// TODO: Sanitize and switch to native wp http
 add_action( 'wp_ajax_nopriv_tumbili_mailchimp_add_subscriber', 'tumbili_mailchimp_add_subscriber' );
 add_action( 'wp_ajax_tumbili_mailchimp_add_subscriber', 'tumbili_mailchimp_add_subscriber' );
 
+// TODO: Could some of this data be passed with a render callback???
 function tumbili_mailchimp_add_subscriber( ) {
 
 	$formData = $_POST['formData'];
 
-	$api_key    = $formData['apikey'];
-	$datacenter = $formData['dc'];
-	$list_id    = $formData['listID'];
-	$errors = array();
-	$data   = array();
-	$first_name = $formData['fname'] ? $formData['fname'] : '';
-	$last_name  = $formData['lname'] ? $formData['lname'] : '';
-	$email      = $formData['email'];
+	// Sanitize data
+	$api_key    = sanitize_key($formData['apikey']);
+	$datacenter = sanitize_text_field($formData['dc']);
+	$list_id    = sanitize_key($formData['listID']);
+	$errors 		= array();
+	$data   		= array();
+	$first_name = $formData['fname'] ? sanitize_text_field($formData['fname']) : '';
+	$last_name  = $formData['lname'] ? sanitize_text_field($formData['lname']) : '';
+	$email      = sanitize_email($formData['email']);
 	$status     = 'pending';
 	// if ( !empty($_POST['status']) ) {
 	// 		$status = $_POST['status'];
 	// }
+
 	$url = "https://{$datacenter}.api.mailchimp.com/3.0/lists/{$list_id}/members/";
-
-	$auth = base64_encode( 'user:'.$api_key );
-
+	$auth = base64_encode( 'user:'.esc_attr($api_key) );
 	$response = [];
 
 	$data = array(
-			'email_address' => $email,
-			'status'        => $status,
+			'email_address' => esc_attr($email),
+			'status'        => esc_attr($status),
 			'merge_fields'  => array(
-					'FNAME'     => $first_name,
-					'LNAME'     => $last_name
+				'FNAME'     	=> esc_attr($first_name),
+				'LNAME'     	=> esc_attr($last_name)
 			)
 	);
 
-	$response = json_encode(tumbili_fetchData($url, $data, $auth));
+	$response = json_encode(tumbili_fetchData(esc_attr($url), $data, $auth));
 	echo $response;
 	wp_die();
 }

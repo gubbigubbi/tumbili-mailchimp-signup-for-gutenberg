@@ -3,7 +3,7 @@ Contributors: gubbigubbi
 Tags: gutenberg, mailchimp, mailchimp signup, mailchimp form
 Requires at least: 4.9.6
 Tested up to: 4.9.7
-Stable tag: 0.1
+Stable tag: 0.2
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +12,7 @@ Easily and instantly preview your mailchimp feed live within the new editor expe
 
 == Description ==
 
-## tumbili: mailchimp Feed for Gutenberg
+## Tumbili: Mailchimp Signup for Gutenberg
 Easily and instantly preview your mailchimp feed live within the new editor (Gutenberg) experience. Adjust settings as neededm such as the number of columns and the spacing. More features to come. 
 
 ###Want to see a feature?
@@ -42,6 +42,7 @@ This plugin is laid out using Flexbox, we do not have plans to support older bro
 == Screenshots ==
 
 1. Adding the tumbili block to the editor and adjusting the settings.
+2. Your signup form as it appears on the front end.
 
 == Changelog ==
 
