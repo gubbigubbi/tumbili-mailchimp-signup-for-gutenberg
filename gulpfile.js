@@ -7,6 +7,7 @@ gulp.task( 'release', () =>
 			[
 				'dist/*',
 				'src/*.php',
+				'src/client.js',
 				'assets/*.jpg',
 				'assets/*.svg',
 				'readme.txt',
