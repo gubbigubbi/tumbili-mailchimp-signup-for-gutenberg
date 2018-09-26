@@ -3,7 +3,7 @@ Contributors: gubbigubbi
 Tags: gutenberg, mailchimp, mailchimp signup, mailchimp form
 Requires at least: 4.9.6
 Tested up to: 4.9.7
-Stable tag: 0.2
+Stable tag: 0.3
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -51,3 +51,6 @@ This plugin is laid out using Flexbox, we do not have plans to support older bro
 
 = 0.2 =
 * Update to sanitize form data
+
+= 0.3 =
+* Update to allow for multiple forms in one page

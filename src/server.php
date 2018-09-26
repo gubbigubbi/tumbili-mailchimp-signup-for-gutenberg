@@ -120,18 +120,18 @@ function tumbili_render_callback( array $attributes ){
 	if($showFirstName) {
 		$firstName .= '
 		<div class="tumbili-form-control flex-grow">
-			<label for="firstName">First Name<input name="firstName" id="FNAME" type="text"></label>
+			<label for="firstName">First Name<input name="firstName" class="tumbiliFName" type="text"></label>
 		</div>';
 	}
 
 	if($showLastName) {
 		$lastName .= '
 		<div class="tumbili-form-control flex-grow">
-			<label for="lastName">Last Name<input name="lastName" id="LNAME" type="text"></label>
+			<label for="lastName">Last Name<input name="lastName" class="tumbiliLName" type="text"></label>
 		</div>';
 	}
 
-	$markup = '<form id="tumbili-form" data-apikey="'.$apiKey.'" data-listid="'.$listID.'" action="'.$formAction.'" method="post" class="wp-block-cgb-tumbili-mailchimp-for-gutenberg">';
+	$markup = '<form class="tumbili-form" data-apikey="'.$apiKey.'" data-listid="'.$listID.'" action="'.$formAction.'" method="post" class="wp-block-cgb-tumbili-mailchimp-for-gutenberg">';
 	
 		$markup .= '<a class="tumbili-response will-animate is-hiding"></a>';
 		$markup .= '<div class="display-flex tumbili-container will-animate">';
@@ -141,7 +141,7 @@ function tumbili_render_callback( array $attributes ){
 
 		$markup .= '
 		<div class="tumbili-form-control flex-grow">
-			<label for="email">Email<input id="tumbiliEmail" name="email" type="email"></label>
+			<label for="email">Email<input class="tumbiliEmail" name="email" type="email"></label>
 		</div>
 		<div class="flex-grow flex-is-at-bottom tumbili-form-control">
 			<button style="background-color: '.$buttonBackground.'; color: '.$buttonColor.'; border-color: '.$buttonBackground.'" class="tumbili-submit" value="Submit" type="submit">

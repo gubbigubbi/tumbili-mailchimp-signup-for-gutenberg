@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Contants
+// Constants
 define( 'TUMBILI_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
