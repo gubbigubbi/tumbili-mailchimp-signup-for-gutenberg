@@ -1,5 +1,5 @@
 //
-// DOM READY
+// DOM READY SCRIPT
 //
 var domIsReady = (function(domIsReady) {
   var isBrowserIeOrNot = function() {
@@ -27,6 +27,9 @@ var domIsReady = (function(domIsReady) {
   return domIsReady;
 })(domIsReady || {});
 
+//
+// DOM IS READY
+//
 (function(document, window, domIsReady, undefined) {
 	domIsReady(function() {
 
