@@ -29,28 +29,64 @@ jQuery( function( $ ) {
 		sendRequestViaAJAX( data, form, loader );
 	}
 
+	// function sendRequestViaAJAX( formData, form, loader ) {
+	// 	jQuery.ajax( {
+	// 		url: tumbili.ajax_url,
+	// 		type: 'post',
+	// 		data: {
+	// 			action: 'tumbili_mailchimp_add_subscriber',
+	// 			formData,
+	// 		},
+	// 		dataType: 'json',
+	// 		beforeSend: () => {
+	// 			form.classList.toggle( 'isSubmitting' );
+	// 			loader.classList.toggle( 'is-hiding' );
+	// 		},
+	// 		success: response => {
+	// 			showApiResult( response );
+	// 		},
+	// 		complete: () => {
+	// 			form.classList.toggle( 'isSubmitting' );
+	// 			loader.classList.toggle( 'is-hiding' );
+	// 		},
+	// 	} );
+	// }
+
 	function sendRequestViaAJAX( formData, form, loader ) {
-		jQuery.ajax( {
-			url: tumbili.ajax_url,
-			type: 'post',
-			data: {
-				action: 'tumbili_mailchimp_add_subscriber',
-				formData,
-			},
-			dataType: 'json',
-			beforeSend: () => {
-				form.classList.toggle( 'isSubmitting' );
-				loader.classList.toggle( 'is-hiding' );
-			},
-			success: response => {
-				showApiResult( response );
-			},
-			complete: () => {
-				form.classList.toggle( 'isSubmitting' );
-				loader.classList.toggle( 'is-hiding' );
-			},
-		} );
-	}
+
+			var data = 'action=tumbili_mailchimp_add_subscriber&formData[apikey]=' + formData.apikey + '&formData[listID]=' + formData.listID + '&formData[dc]=' + formData.dc + '&formData[fname]=' + formData.fname + '&formData[lname]=' + formData.lname + '&formData[email]=' + formData.email;
+
+			var serialized_data = encodeURI( data );
+
+			var xhr = new XMLHttpRequest();
+			var url = tumbili.ajax_url;
+
+			form.classList.toggle( 'isSubmitting' );
+			loader.classList.toggle( 'is-hiding' );
+
+			xhr.open( "POST", url, true);
+			xhr.setRequestHeader( 'Accept', 'application/json, text/javascript, */*; q=0.01' );
+			xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8' );
+			xhr.setRequestHeader( 'X-Requested-With', 'XMLHttpRequest' );
+
+			xhr.responseType = 'json';
+			xhr.onerror = function(){
+	    	console.log( 'Error: Do something else...' );
+			}
+			xhr.onprogress = function () {
+			  console.log( 'status:LOADING', xhr.status, ' STATE', xhr.readyState, ' RESPONSE', JSON.parse(xhr.response) );
+			};
+			xhr.onload = function ( response ) {
+				if (this.status == 200) {
+					form.classList.toggle( 'isSubmitting' );
+					loader.classList.toggle( 'is-hiding' );
+	    		console.log( 'status:DONE', xhr.status, ' STATE', xhr.readyState, 'NoParseResponse', this.response ); // JSON response
+					var mailchimpResponse = this.response;
+					showApiResult( mailchimpResponse );
+	  		}
+			};
+			xhr.send( serialized_data );
+		}
 
 	function showApiResult( response ) {
 		console.log( response );
