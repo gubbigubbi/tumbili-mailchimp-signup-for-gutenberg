@@ -41,7 +41,7 @@ var domIsReady = (function(domIsReady) {
 			data.fname = form.querySelector( '.tumbiliFName' ) ?
 				form
 					.querySelector( '.tumbiliFName' )
-					.value :
+					.value : 
 				'';
 
 			data.lname = form.querySelector( '.tumbiliLName' ) ?
