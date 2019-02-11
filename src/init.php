@@ -28,7 +28,7 @@ function tumbili_block_assets() {
 	wp_enqueue_style(
 		'tumbili-style-css', // Handle.
 		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
-		array( 'wp-blocks' ) // Dependency to include the CSS after it.
+		array( 'wp-editor' ) // Dependency to include the CSS after it.
 		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: filemtime — Gets file modification time.
 	);
 } // End function tumbili_block_assets().
@@ -41,7 +41,7 @@ add_action( 'enqueue_block_assets', 'tumbili_block_assets' );
  */
 
  function tumbili_client_assets() {
-	wp_enqueue_script( 'tumbili-js', plugins_url( 'src/client.js', dirname( __FILE__ ) ), array('jquery'), true );
+	wp_enqueue_script( 'tumbili-js', plugins_url( 'dist/client.babel.js', dirname( __FILE__ ) ), array(), true );
 
 	wp_localize_script( 'tumbili-js', 'tumbili', array(
 		'ajax_url' => admin_url( 'admin-ajax.php' )
@@ -64,7 +64,7 @@ function tumbili_editor_assets() {
 	wp_enqueue_script(
 		'tumbili-block-js', // Handle.
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
-		array( 'wp-blocks', 'wp-i18n', 'wp-element' ), // Dependencies, defined above.
+		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
 		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
 		true // Enqueue the script in the footer.
 	);
@@ -85,4 +85,3 @@ add_action( 'enqueue_block_editor_assets', 'tumbili_editor_assets' );
  * Server Side Rendering
  */
 require_once( TUMBILI_PLUGIN_PATH . './server.php' );
-

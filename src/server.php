@@ -131,7 +131,7 @@ function tumbili_render_callback( array $attributes ){
 		</div>';
 	}
 
-	$markup = '<form class="tumbili-form" data-apikey="'.$apiKey.'" data-listid="'.$listID.'" action="'.$formAction.'" method="post" class="wp-block-cgb-tumbili-mailchimp-for-gutenberg">';
+	$markup = '<form class="tumbili-form" id="tumbili-form-'.rand(0, 1000).'" data-apikey="'.$apiKey.'" data-listid="'.$listID.'" action="'.$formAction.'" method="post" class="wp-block-cgb-tumbili-mailchimp-for-gutenberg">';
 	
 		$markup .= '<a class="tumbili-response will-animate is-hiding"></a>';
 		$markup .= '<div class="display-flex tumbili-container will-animate">';

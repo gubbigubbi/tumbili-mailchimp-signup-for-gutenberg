@@ -1,8 +1,8 @@
 //import Inspector from './inspector';
-const { Component, Fragment } = wp.element;
+const { Component } = wp.element;
 
-const { InspectorControls, ColorPalette } = wp.editor;
-const { PanelBody, PanelColor, TextControl, ToggleControl } = wp.components;
+const { InspectorControls, PanelColorSettings } = wp.editor;
+const { PanelBody, TextControl, ToggleControl } = wp.components;
 
 const { __ } = wp.i18n;
 
@@ -112,26 +112,23 @@ export default class mailchimpEdit extends Component {
 							checked={ showLastName }
 							onChange={ showLastName => setAttributes( { showLastName } ) }
 						/>
-						<PanelColor
-							title={ __( 'Button Background Color' ) }
-							colorValue={ buttonBackground }
-						>
-							<ColorPalette
-								value={ buttonBackground }
-								onChange={ buttonBackground =>
-									setAttributes( { buttonBackground } )
-								}
-							/>
-						</PanelColor>
-						<PanelColor
-							title={ __( 'Button Text Color' ) }
-							colorValue={ buttonColor }
-						>
-							<ColorPalette
-								value={ buttonColor }
-								onChange={ buttonColor => setAttributes( { buttonColor } ) }
-							/>
-						</PanelColor>
+
+						<PanelColorSettings
+							title={ __( 'Color Settings' ) }
+							colorSettings={ [
+								{
+									value: buttonBackground,
+									onChange: buttonBackground =>
+										setAttributes( { buttonBackground } ),
+									label: __( 'Button Background Color' ),
+								},
+								{
+									value: buttonColor,
+									onChange: buttonColor => setAttributes( { buttonColor } ),
+									label: __( 'Button Text Color' ),
+								},
+							] }
+						/>
 					</PanelBody>
 				</InspectorControls>
 				{ container }
