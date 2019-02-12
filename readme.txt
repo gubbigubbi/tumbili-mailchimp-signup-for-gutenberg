@@ -3,7 +3,7 @@ Contributors: gubbigubbi
 Tags: gutenberg, mailchimp, mailchimp signup, mailchimp form
 Requires at least: 4.9.6
 Tested up to: 5.0
-Stable tag: 0.4
+Stable tag: 0.5
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -35,7 +35,7 @@ Firstly make sure that you have the Gutenberg plugin installed.
 We will continue adding features as requested. If you have a killer idea for a feature submit a support request and we will see what we can do.
 Note: we plan to release a premium version of the plugin which will likely receive new features first - this helps offset the cost of our development time.
 
-= The feed looks funny in I10 (Or other old browser)
+= The feed looks funny in IE10 (Or other old browser)
 
 This plugin is laid out using Flexbox, we do not have plans to support older browsers as we believe they are holding back the web. However we can (if requested) release some code which you can add to your site's custom css in order to support certain browsers.
 
@@ -45,6 +45,9 @@ This plugin is laid out using Flexbox, we do not have plans to support older bro
 2. Your signup form as it appears on the front end.
 
 == Changelog ==
+
+= 0.5 =
+* Fixed client issue with multiple forms using vanilla js
 
 = 0.4 =
 * WP 5.0 support
