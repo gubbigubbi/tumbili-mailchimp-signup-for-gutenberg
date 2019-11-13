@@ -36,7 +36,7 @@ var domIsReady = ( function( domIsReady ) {
 	domIsReady( function() {
 		function tumbiliSubmitForm( evt ) {
 			const form = evt.target;
-			// console.log( form.querySelectorAll( '.tumbili-loader' ) );
+
 			const loader = form.querySelector( '.tumbili-loader' );
 			const data = {};
 
@@ -52,6 +52,24 @@ var domIsReady = ( function( domIsReady ) {
 				form.querySelector( '.tumbiliEmail' ).value :
 				'';
 
+			const fields = form.querySelectorAll( '.tumbili-custom-field' ) ?
+				form.querySelectorAll( '.tumbili-custom-field' ) :
+				[];
+
+			data.fields = [ ...fields ].map( field => {
+				const type = field.dataset.type;
+				const value =
+					type === 'select' ?
+						field.options[ field.selectedIndex ].text :
+						field.value;
+
+				return {
+					mergeField: field.name,
+					value,
+					type,
+				};
+			} );
+
 			data.apikey = form.dataset.apikey;
 			data.listID = form.dataset.listid;
 			data.dc = form.dataset.apikey.split( '-' )[ 1 ];
@@ -60,19 +78,17 @@ var domIsReady = ( function( domIsReady ) {
 		}
 
 		function sendRequestViaAJAX( formData, form, loader ) {
-			const data =
-				'action=tumbili_mailchimp_add_subscriber&formData[apikey]=' +
-				formData.apikey +
-				'&formData[listID]=' +
-				formData.listID +
-				'&formData[dc]=' +
-				formData.dc +
-				'&formData[fname]=' +
-				formData.fname +
-				'&formData[lname]=' +
-				formData.lname +
-				'&formData[email]=' +
-				formData.email;
+			let fields = '';
+
+			if ( formData.fields ) {
+				formData.fields.map( field => {
+					if ( field.value ) {
+						fields += `&formCustomFields[${ field.mergeField }]=${ field.value }`;
+					}
+				} );
+			}
+
+			const data = `action=tumbili_mailchimp_add_subscriber&formData[apikey]=${ formData.apikey }&formData[listID]=${ formData.listID }&formData[dc]=${ formData.dc }&formData[fname]=${ formData.fname }&formData[lname]=${ formData.lname }&formData[email]=${ formData.email }${ fields }`;
 
 			const serializedData = encodeURI( data );
 
@@ -160,8 +176,6 @@ var domIsReady = ( function( domIsReady ) {
 		const formTumbili = document.querySelectorAll( '.tumbili-form' );
 
 		for ( let i = 0; i < formTumbili.length; i++ ) {
-			console.log( 'docForms[i]: ', formTumbili[ i ] );
-
 			formTumbili[ i ].addEventListener( 'submit', function( evt ) {
 				evt.preventDefault();
 				tumbiliSubmitForm( evt );

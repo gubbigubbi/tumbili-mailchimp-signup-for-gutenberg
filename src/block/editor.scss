@@ -19,3 +19,37 @@
 		background-color: darken($blue, 5%);
 	}
 }
+
+.tumbili-form-control {
+	position: relative;
+}
+
+.tumbili-type-options {
+	padding: 8px;
+	margin-bottom: 19.5px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.tumbili-field-option {
+	padding: 5px;
+	margin-top: 5px;
+	background-color: #f1f1f1;
+	border-radius: 5px;
+	font-size: 12px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.tumbili-field-action {
+	position: absolute;
+	top: 6px;
+	right: 5px;
+	> * {
+		opacity: 0.5;
+		&:hover {
+			opacity: 1;
+		}
+	}
+}

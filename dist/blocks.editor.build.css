@@ -1,1 +1,53 @@
-.tumbili-submit{color:#fff;padding:6px 9px;font-size:13px;-webkit-transition:all 0.5s ease;-o-transition:all 0.5s ease;transition:all 0.5s ease;border-width:0px}.tumbili-submit:hover,.tumbili-submit:active{background-color:#753a10}
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+.tumbili-submit {
+  color: #fff;
+  padding: 6px 9px;
+  font-size: 13px;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  border-width: 0px; }
+  .tumbili-submit:hover, .tumbili-submit:active {
+    background-color: #753a10; }
+
+.tumbili-form-control {
+  position: relative; }
+
+.tumbili-type-options {
+  padding: 8px;
+  margin-bottom: 19.5px;
+  border: 1px solid #ccc;
+  border-radius: 5px; }
+
+.tumbili-field-option {
+  padding: 5px;
+  margin-top: 5px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  font-size: 12px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center; }
+
+.tumbili-field-action {
+  position: absolute;
+  top: 6px;
+  right: 5px; }
+  .tumbili-field-action > * {
+    opacity: 0.5; }
+    .tumbili-field-action > *:hover {
+      opacity: 1; }

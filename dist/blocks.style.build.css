@@ -1,1 +1,174 @@
-.tumbili-form,.wp-block-cgb-tumbili-mailchimp-for-gutenberg{margin:0 auto;position:relative}.display-flex{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap}.display-flex>*{padding-left:.6rem;padding-right:.6rem}.flex-grow{-ms-flex-positive:1;flex-grow:1}.flex-is-at-bottom{display:-ms-flexbox;display:flex;-ms-flex-align:end;align-items:end}.tumbili-form-control{margin-bottom:1rem}.tumbili-form-control input,.tumbili-form-control label{display:block}.tumbili-form-control input{width:100%}.tumbili-submit{width:100%;background-color:#8b4513;border-color:#8b4513}.tumbili-submit .tumbili-loader{display:inline-block;margin-right:0.5rem}.tumbili-submit .tumbili-loader.is-hiding{width:0;margin-right:0;display:none}.tumbili-response{text-align:center;position:absolute;width:100%;max-width:440px;top:50%;left:50%;-webkit-transform:translateY(-50%) translateX(-50%);-ms-transform:translateY(-50%) translateX(-50%);transform:translateY(-50%) translateX(-50%);padding:0.5rem;-webkit-box-shadow:0 4px 8px 0 rgba(0,0,0,0.12),0 2px 4px 0 rgba(0,0,0,0.08);box-shadow:0 4px 8px 0 rgba(0,0,0,0.12),0 2px 4px 0 rgba(0,0,0,0.08);border-radius:0.25rem}.tumbili-response:after{content:'';background-image:url("../assets/reload.svg");background-size:24px 24px;height:24px;width:24px;margin-left:0.5rem;display:inline-block;vertical-align:middle}.tumbili-container{-webkit-transition:all 0.3s ease;-o-transition:all 0.3s ease;transition:all 0.3s ease;margin-bottom:-1rem}.isSubmitting input{-webkit-filter:blur(1px);filter:blur(1px)}.will-animate{-webkit-transition:all 400ms;-o-transition:all 400ms;transition:all 400ms}.is-showing{opacity:1}.is-hiding{opacity:0;visibility:hidden}@-webkit-keyframes ball-pulse-sync{33%{-webkit-transform:translateY(7px);transform:translateY(7px)}66%{-webkit-transform:translateY(-7px);transform:translateY(-7px)}100%{-webkit-transform:translateY(0);transform:translateY(0)}}@keyframes ball-pulse-sync{33%{-webkit-transform:translateY(7px);transform:translateY(7px)}66%{-webkit-transform:translateY(-7px);transform:translateY(-7px)}100%{-webkit-transform:translateY(0);transform:translateY(0)}}.ball-pulse-sync>div:nth-child(1){-webkit-animation:ball-pulse-sync 0.7s -.14s infinite ease-in-out;animation:ball-pulse-sync 0.7s -.14s infinite ease-in-out}.ball-pulse-sync>div:nth-child(2){-webkit-animation:ball-pulse-sync 0.7s -.07s infinite ease-in-out;animation:ball-pulse-sync 0.7s -.07s infinite ease-in-out}.ball-pulse-sync>div:nth-child(3){-webkit-animation:ball-pulse-sync 0.7s 0s infinite ease-in-out;animation:ball-pulse-sync 0.7s 0s infinite ease-in-out}.ball-pulse-sync>div{background-color:#fff;width:8px;height:8px;border-radius:100%;margin:2px;-webkit-animation-fill-mode:both;animation-fill-mode:both;display:inline-block}
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+.tumbili-form,
+.wp-block-cgb-tumbili-mailchimp-for-gutenberg {
+  margin: 0 auto;
+  position: relative; }
+
+.display-flex {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+  .display-flex > * {
+    padding-left: 0.6rem;
+    padding-right: 0.6rem; }
+
+.flex-grow {
+  -ms-flex-positive: 1;
+      flex-grow: 1; }
+
+.flex-is-at-bottom {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: end;
+      align-items: end; }
+
+/**
+Labels
+**/
+.tumbili-form-control {
+  margin-bottom: 1rem; }
+  .tumbili-form-control input,
+  .tumbili-form-control select,
+  .tumbili-form-control label {
+    display: block; }
+  .tumbili-form-control input,
+  .tumbili-form-control select {
+    width: 100%; }
+  .tumbili-form-control.is-full-width {
+    -ms-flex-preferred-size: 100%;
+        flex-basis: 100%; }
+
+/**
+Submit
+**/
+.tumbili-submit {
+  width: 100%;
+  background-color: saddlebrown;
+  border-color: saddlebrown; }
+  .tumbili-submit .tumbili-loader {
+    display: inline-block;
+    margin-right: 0.5rem; }
+  .tumbili-submit .tumbili-loader.is-hiding {
+    width: 0;
+    margin-right: 0;
+    display: none; }
+
+/**
+Response
+**/
+.tumbili-response {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  max-width: 440px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateY(-50%) translateX(-50%);
+      -ms-transform: translateY(-50%) translateX(-50%);
+          transform: translateY(-50%) translateX(-50%);
+  padding: 0.5rem;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+  border-radius: 0.25rem; }
+  .tumbili-response:after {
+    content: '';
+    background-image: url("../assets/reload.svg");
+    background-size: 24px 24px;
+    height: 24px;
+    width: 24px;
+    margin-left: 0.5rem;
+    display: inline-block;
+    vertical-align: middle; }
+
+/**
+Interactivity
+**/
+.tumbili-container {
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  margin-bottom: -1rem; }
+
+.isSubmitting input {
+  -webkit-filter: blur(1px);
+          filter: blur(1px); }
+
+.will-animate {
+  -webkit-transition: all 400ms;
+  -o-transition: all 400ms;
+  transition: all 400ms; }
+
+.is-showing {
+  opacity: 1; }
+
+.is-hiding {
+  opacity: 0;
+  visibility: hidden; }
+
+/**
+ * Copyright (c) 2016 Connor Atherton
+ *
+ * All animations must live in their own file
+ * in the animations directory and be included
+ * here.
+ *
+ */
+/**
+ * Styles shared by multiple animations
+ */
+/**
+ * Dots
+ */
+@-webkit-keyframes ball-pulse-sync {
+  33% {
+    -webkit-transform: translateY(7px);
+            transform: translateY(7px); }
+  66% {
+    -webkit-transform: translateY(-7px);
+            transform: translateY(-7px); }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0); } }
+@keyframes ball-pulse-sync {
+  33% {
+    -webkit-transform: translateY(7px);
+            transform: translateY(7px); }
+  66% {
+    -webkit-transform: translateY(-7px);
+            transform: translateY(-7px); }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0); } }
+
+.ball-pulse-sync > div:nth-child(1) {
+  -webkit-animation: ball-pulse-sync 0.7s -0.14s infinite ease-in-out;
+          animation: ball-pulse-sync 0.7s -0.14s infinite ease-in-out; }
+
+.ball-pulse-sync > div:nth-child(2) {
+  -webkit-animation: ball-pulse-sync 0.7s -0.07s infinite ease-in-out;
+          animation: ball-pulse-sync 0.7s -0.07s infinite ease-in-out; }
+
+.ball-pulse-sync > div:nth-child(3) {
+  -webkit-animation: ball-pulse-sync 0.7s 0s infinite ease-in-out;
+          animation: ball-pulse-sync 0.7s 0s infinite ease-in-out; }
+
+.ball-pulse-sync > div {
+  background-color: #fff;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  margin: 2px;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  display: inline-block; }

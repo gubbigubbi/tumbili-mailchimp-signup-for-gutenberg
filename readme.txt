@@ -2,9 +2,9 @@
 Contributors: gubbigubbi 	
 Tags: gutenberg, mailchimp, mailchimp signup, mailchimp form
 Requires at least: 4.9.6
-Tested up to: 5.0
-Stable tag: 0.5
-Requires PHP: 5.4
+Tested up to: 5.3
+Stable tag: 0.6
+Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 

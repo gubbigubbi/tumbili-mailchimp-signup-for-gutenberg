@@ -30,6 +30,10 @@ register_block_type('cgb/tumbili-mailchimp-for-gutenberg', array(
 				'type' 		=> 'string',
 				'default' => '',
 			),
+			'fields'	=> array(
+				'type'		=> 'array',
+				'default' => []
+			),
 		)
 	)
 );
@@ -59,6 +63,21 @@ function tumbili_mailchimp_add_subscriber( ) {
 	// 		$status = $_POST['status'];
 	// }
 
+	$fields 		= $_POST['formCustomFields'];
+
+	$mergeFields =  array(
+		'FNAME'     	=> esc_attr($first_name),
+		'LNAME'     	=> esc_attr($last_name)
+	);
+
+	if($fields) {		
+		foreach($fields as $key => $field) {
+			$fieldsArr[$key] = esc_attr($field);
+		}
+
+		$mergeFields = array_merge($mergeFields, $fieldsArr);	
+	}
+	
 	$url = "https://{$datacenter}.api.mailchimp.com/3.0/lists/{$list_id}/members/";
 	$auth = base64_encode( 'user:'.esc_attr($api_key) );
 	$response = [];
@@ -66,10 +85,7 @@ function tumbili_mailchimp_add_subscriber( ) {
 	$data = array(
 			'email_address' => esc_attr($email),
 			'status'        => esc_attr($status),
-			'merge_fields'  => array(
-				'FNAME'     	=> esc_attr($first_name),
-				'LNAME'     	=> esc_attr($last_name)
-			)
+			'merge_fields'	=> $mergeFields,
 	);
 
 	$response = json_encode(tumbili_fetchData(esc_attr($url), $data, $auth));
@@ -106,16 +122,18 @@ function tumbili_fetchData($url, $data, $auth) {
  */
 function tumbili_render_callback( array $attributes ){
 	
-	$formAction			= $attributes[ 'formAction' ];
-	$apiKey					= $attributes[ 'apiKey' ];
-	$listID					= $attributes[ 'listID' ]		;
-	$showFirstName	= $attributes[ 'showFirstName' ];
-	$showLastName 	= $attributes[ 'showLastName' ];
+	$formAction					= $attributes[ 'formAction' ];
+	$apiKey							= $attributes[ 'apiKey' ];
+	$listID							= $attributes[ 'listID' ]		;
+	$showFirstName			= $attributes[ 'showFirstName' ];
+	$showLastName 			= $attributes[ 'showLastName' ];
 	$buttonBackground 	= $attributes[ 'buttonBackground' ];
-	$buttonColor 	= $attributes[ 'buttonColor' ];
+	$buttonColor 				= $attributes[ 'buttonColor' ];
+	$fields 						= $attributes[ 'fields' ];
 
 	$firstName = '';
 	$lastName = '';
+	$fieldsHTML = '';
 
 	if($showFirstName) {
 		$firstName .= '
@@ -131,6 +149,24 @@ function tumbili_render_callback( array $attributes ){
 		</div>';
 	}
 
+	foreach ($fields as $field) {
+
+		$width = $field['fullWidth'] ? 'is-full-width' : '';
+		
+		$fieldsHTML .= '<div class="tumbili-form-control flex-grow '.$width.'"><label for="'.$field['value'].'">'.$field['label'];
+		
+		if( $field['type'] == 'text' ) {
+			$fieldsHTML .= '<input name="'.$field['value'].'" class="tumbili-custom-field" type="text" data-type="'.$field['type'].'"></label>';
+		} else {
+			$fieldsHTML .= '<select name="'.$field['value'].'" class="tumbili-custom-field" data-type="'.$field['type'].'">';
+			foreach($field['options'] as $option) {
+				$fieldsHTML .= '<option value="'.$option['value'].'">'.$option['label'].'</option>';
+			}
+			$fieldsHTML .= '</select>';
+		}
+		$fieldsHTML .= '</label></div>';
+	}
+
 	$markup = '<form class="tumbili-form" id="tumbili-form-'.rand(0, 1000).'" data-apikey="'.$apiKey.'" data-listid="'.$listID.'" action="'.$formAction.'" method="post" class="wp-block-cgb-tumbili-mailchimp-for-gutenberg">';
 	
 		$markup .= '<a class="tumbili-response will-animate is-hiding"></a>';
@@ -142,7 +178,7 @@ function tumbili_render_callback( array $attributes ){
 		$markup .= '
 		<div class="tumbili-form-control flex-grow">
 			<label for="email">Email<input class="tumbiliEmail" name="email" type="email"></label>
-		</div>
+		</div>'.$fieldsHTML.'
 		<div class="flex-grow flex-is-at-bottom tumbili-form-control">
 			<button style="background-color: '.$buttonBackground.'; color: '.$buttonColor.'; border-color: '.$buttonBackground.'" class="tumbili-submit" value="Submit" type="submit">
 				<div class="tumbili-loader will-animate is-hiding">
@@ -155,8 +191,6 @@ function tumbili_render_callback( array $attributes ){
 				Submit
 			</button>
 		</div>
-
-
 		';
 	
 

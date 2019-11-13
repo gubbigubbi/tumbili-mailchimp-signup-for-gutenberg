@@ -1,5 +1,13 @@
 "use strict";
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 //
 // DOM READY SCRIPT
 //
@@ -35,13 +43,22 @@ var domIsReady = function (domIsReady) {
 (function (document, window, domIsReady, undefined) {
   domIsReady(function () {
     function tumbiliSubmitForm(evt) {
-      var form = evt.target; // console.log( form.querySelectorAll( '.tumbili-loader' ) );
-
+      var form = evt.target;
       var loader = form.querySelector('.tumbili-loader');
       var data = {};
       data.fname = form.querySelector('.tumbiliFName') ? form.querySelector('.tumbiliFName').value : '';
       data.lname = form.querySelector('.tumbiliLName') ? form.querySelector('.tumbiliLName').value : '';
       data.email = form.querySelector('.tumbiliEmail') ? form.querySelector('.tumbiliEmail').value : '';
+      var fields = form.querySelectorAll('.tumbili-custom-field') ? form.querySelectorAll('.tumbili-custom-field') : [];
+      data.fields = _toConsumableArray(fields).map(function (field) {
+        var type = field.dataset.type;
+        var value = type === 'select' ? field.options[field.selectedIndex].text : field.value;
+        return {
+          mergeField: field.name,
+          value: value,
+          type: type
+        };
+      });
       data.apikey = form.dataset.apikey;
       data.listID = form.dataset.listid;
       data.dc = form.dataset.apikey.split('-')[1];
@@ -49,7 +66,17 @@ var domIsReady = function (domIsReady) {
     }
 
     function sendRequestViaAJAX(formData, form, loader) {
-      var data = 'action=tumbili_mailchimp_add_subscriber&formData[apikey]=' + formData.apikey + '&formData[listID]=' + formData.listID + '&formData[dc]=' + formData.dc + '&formData[fname]=' + formData.fname + '&formData[lname]=' + formData.lname + '&formData[email]=' + formData.email;
+      var fields = '';
+
+      if (formData.fields) {
+        formData.fields.map(function (field) {
+          if (field.value) {
+            fields += "&formCustomFields[".concat(field.mergeField, "]=").concat(field.value);
+          }
+        });
+      }
+
+      var data = "action=tumbili_mailchimp_add_subscriber&formData[apikey]=".concat(formData.apikey, "&formData[listID]=").concat(formData.listID, "&formData[dc]=").concat(formData.dc, "&formData[fname]=").concat(formData.fname, "&formData[lname]=").concat(formData.lname, "&formData[email]=").concat(formData.email).concat(fields);
       var serializedData = encodeURI(data);
       var xhr = new XMLHttpRequest();
       var url = tumbili.ajax_url;
@@ -119,7 +146,6 @@ var domIsReady = function (domIsReady) {
     var formTumbili = document.querySelectorAll('.tumbili-form');
 
     for (var i = 0; i < formTumbili.length; i++) {
-      console.log('docForms[i]: ', formTumbili[i]);
       formTumbili[i].addEventListener('submit', function (evt) {
         evt.preventDefault();
         tumbiliSubmitForm(evt);

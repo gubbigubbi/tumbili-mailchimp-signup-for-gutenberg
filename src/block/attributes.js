@@ -23,4 +23,8 @@ export const attributes = {
 		type: 'string',
 		default: '',
 	},
+	fields: {
+		type: 'array',
+		default: [],
+	},
 };

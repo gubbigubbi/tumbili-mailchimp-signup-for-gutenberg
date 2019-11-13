@@ -4,7 +4,6 @@
  * CSS for both Frontend+Backend.
  */
 
-
 // THIS CLASS IS NOT BEING RENDER SO I'M ADDING THIS AS WELL
 .tumbili-form,
 .wp-block-cgb-tumbili-mailchimp-for-gutenberg {
@@ -35,11 +34,16 @@ Labels
 .tumbili-form-control {
 	margin-bottom: 1rem;
 	input,
+	select,
 	label {
 		display: block;
 	}
-	input {
+	input,
+	select {
 		width: 100%;
+	}
+	&.is-full-width {
+		flex-basis: 100%;
 	}
 }
 
