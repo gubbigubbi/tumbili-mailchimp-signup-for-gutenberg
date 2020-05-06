@@ -2,8 +2,8 @@
 Contributors: gubbigubbi 	
 Tags: gutenberg, mailchimp, mailchimp signup, mailchimp form
 Requires at least: 4.9.6
-Tested up to: 5.3
-Stable tag: 0.6
+Tested up to: 5.4
+Stable tag: 0.7
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -45,6 +45,13 @@ This plugin is laid out using Flexbox, we do not have plans to support older bro
 2. Your signup form as it appears on the front end.
 
 == Changelog ==
+
+= 0.7 =
+* Added extra controls for label color and submit text
+* Fixed bug with form reset
+
+= 0.6 =
+* Added custom field support!
 
 = 0.5 =
 * Fixed client issue with multiple forms using vanilla js

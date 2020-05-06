@@ -129,6 +129,8 @@ function tumbili_render_callback( array $attributes ){
 	$showLastName 			= $attributes[ 'showLastName' ];
 	$buttonBackground 	= $attributes[ 'buttonBackground' ];
 	$buttonColor 				= $attributes[ 'buttonColor' ];
+	$buttonText 				= $attributes[ 'buttonText' ];
+	$labelColor 				= $attributes[ 'labelColor' ];
 	$fields 						= $attributes[ 'fields' ];
 
 	$firstName = '';
@@ -138,14 +140,14 @@ function tumbili_render_callback( array $attributes ){
 	if($showFirstName) {
 		$firstName .= '
 		<div class="tumbili-form-control flex-grow">
-			<label for="firstName">First Name<input name="firstName" class="tumbiliFName" type="text"></label>
+			<label for="firstName" style="color: '.$labelColor.'">First Name<input name="firstName" class="tumbiliFName" type="text"></label>
 		</div>';
 	}
 
 	if($showLastName) {
 		$lastName .= '
 		<div class="tumbili-form-control flex-grow">
-			<label for="lastName">Last Name<input name="lastName" class="tumbiliLName" type="text"></label>
+			<label for="lastName" style="color: '.$labelColor.'">Last Name<input name="lastName" class="tumbiliLName" type="text"></label>
 		</div>';
 	}
 
@@ -153,7 +155,7 @@ function tumbili_render_callback( array $attributes ){
 
 		$width = $field['fullWidth'] ? 'is-full-width' : '';
 		
-		$fieldsHTML .= '<div class="tumbili-form-control flex-grow '.$width.'"><label for="'.$field['value'].'">'.$field['label'];
+		$fieldsHTML .= '<div class="tumbili-form-control flex-grow '.$width.'"><label for="'.$field['value'].'" style="color: '.$labelColor.'">'.$field['label'];
 		
 		if( $field['type'] == 'text' ) {
 			$fieldsHTML .= '<input name="'.$field['value'].'" class="tumbili-custom-field" type="text" data-type="'.$field['type'].'"></label>';
@@ -177,10 +179,10 @@ function tumbili_render_callback( array $attributes ){
 
 		$markup .= '
 		<div class="tumbili-form-control flex-grow">
-			<label for="email">Email<input class="tumbiliEmail" name="email" type="email"></label>
+			<label for="email" style="color: '.$labelColor.'">Email<input class="tumbiliEmail" name="email" type="email"></label>
 		</div>'.$fieldsHTML.'
 		<div class="flex-grow flex-is-at-bottom tumbili-form-control">
-			<button style="background-color: '.$buttonBackground.'; color: '.$buttonColor.'; border-color: '.$buttonBackground.'" class="tumbili-submit" value="Submit" type="submit">
+			<button style="background-color: '.$buttonBackground.'; color: '.$buttonColor.'; border-color: '.$buttonBackground.'" class="tumbili-submit" value="'.$buttonText.'" type="submit">
 				<div class="tumbili-loader will-animate is-hiding">
 				<div class="loader-inner ball-pulse-sync">
 					<div></div>
@@ -188,7 +190,7 @@ function tumbili_render_callback( array $attributes ){
 					<div></div>
 				</div>
 				</div>
-				Submit
+				'.$buttonText.'
 			</button>
 		</div>
 		';

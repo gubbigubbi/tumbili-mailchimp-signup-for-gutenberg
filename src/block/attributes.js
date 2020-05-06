@@ -1,30 +1,38 @@
 export const attributes = {
 	apiKey: {
-		type: 'string',
-		default: '',
+		type: "string",
+		default: "",
 	},
 	listID: {
-		type: 'string',
-		default: '',
+		type: "string",
+		default: "",
 	},
 	showFirstName: {
-		type: 'boolean',
+		type: "boolean",
 		default: false,
 	},
 	showLastName: {
-		type: 'boolean',
+		type: "boolean",
 		default: false,
 	},
 	buttonBackground: {
-		type: 'string',
-		default: '',
+		type: "string",
+		default: "",
 	},
 	buttonColor: {
-		type: 'string',
-		default: '',
+		type: "string",
+		default: "",
+	},
+	buttonText: {
+		type: "string",
+		default: "Submit",
+	},
+	labelColor: {
+		type: "string",
+		default: "",
 	},
 	fields: {
-		type: 'array',
+		type: "array",
 		default: [],
 	},
 };
